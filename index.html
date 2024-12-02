@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Thank You Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(https://c.tenor.com/G5AmFC5eG1oAAAAC/tenor.gif);
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.416);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid wheat;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: wheat;
+        }
+        p {
+            color: wheat;
+        }
+        .button {
+            background-color: #ecc94b;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            background-color: #d69e2e;
+        }
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .icon {
+            font-size: 2rem;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        .spin {
+            animation: spin 5s linear infinite;
+        }
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            user-select: none;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Thank You for the Birthday Wishes!</h1>
+        <div id="cardContent">
+            <button id="openCard" class="button">Open Your Thank You Card</button>
+        </div>
+        <button id="toggleMusic" class="button" style="margin-top: 1rem;">🎵</button>
+    </div>
+
+    <!-- Add your song here -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="C:\Users\it\Downloads\piano-melody-180657.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const cardContent = document.getElementById('cardContent');
+        const openCardBtn = document.getElementById('openCard');
+        const toggleMusicBtn = document.getElementById('toggleMusic');
+        const bgMusic = document.getElementById('bgMusic');
+        let isMusicPlaying = true; // Music starts playing by default
+
+        openCardBtn.addEventListener('click', () => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            cardContent.innerHTML = `
+                <p>Your wishes made my day extra special! I'm so grateful for your kindness and thoughtfulness.<br>&<br> Happy Diwali<br>To All</p>
+                <div class="icons">
+                    <span class="icon bounce">🎂</span>
+                    <span class="icon spin">⭐</span>
+                    <span class="icon bounce">🎂</span>
+                </div>
+                <button id="sendLove" class="button">Send Love Back ❤️</button>
+            `;
+            document.getElementById('sendLove').addEventListener('click', addHeart);
+        });
+
+        toggleMusicBtn.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                toggleMusicBtn.textContent = '🔇';
+            } else {
+                bgMusic.play().catch(error => console.error("Audio playback failed:", error));
+                toggleMusicBtn.textContent = '🎵';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+
+        function addHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = '50px';
+            heart.style.animation = `float ${Math.random() * 2 + 3}s ease-in`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
