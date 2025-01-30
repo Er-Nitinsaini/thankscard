@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url(https://c.tenor.com/G5AmFC5eG1oAAAAC/tenor.gif);
+            background: url(https://c.tenor.com/G5AmFC5eG1oAAAAC/tenor.gif)
         }
         .card {
             background: rgba(0, 0, 0, 0.416);
@@ -89,9 +89,8 @@
         <button id="toggleMusic" class="button" style="margin-top: 1rem;">🎵</button>
     </div>
 
-    <!-- Add your song here -->
     <audio id="bgMusic" autoplay loop>
-        <source src="C:\Users\it\Downloads\piano-melody-180657.mp3" type="audio/mpeg">
+        <source src="piano-melody-180657.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -100,7 +99,7 @@
         const openCardBtn = document.getElementById('openCard');
         const toggleMusicBtn = document.getElementById('toggleMusic');
         const bgMusic = document.getElementById('bgMusic');
-        let isMusicPlaying = true; // Music starts playing by default
+        let isMusicPlaying = false;
 
         openCardBtn.addEventListener('click', () => {
             confetti({
@@ -109,9 +108,9 @@
                 origin: { y: 0.6 }
             });
             cardContent.innerHTML = `
-                <p>Your wishes made my day extra special! I'm so grateful for your kindness and thoughtfulness.<br>&<br> Happy Diwali<br>To All</p>
+                <p>Your wishes made my day extra special! I'm so grateful for your kindness and thoughtfulness.</p>
                 <div class="icons">
-                    <span class="icon bounce">🎂</span>
+                    <span class="icon bounce">🎂😒</span>
                     <span class="icon spin">⭐</span>
                     <span class="icon bounce">🎂</span>
                 </div>
@@ -136,8 +135,8 @@
             heart.classList.add('heart');
             heart.textContent = '❤️';
             heart.style.left = Math.random() * 100 + '%';
-            heart.style.fontSize = '50px';
-            heart.style.animation = `float ${Math.random() * 2 + 3}s ease-in`;
+            heart.style.fontSize = '50px'
+            heart.style.animation = `float ${Math.random() * 2 + 3}s ease-in `;
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
